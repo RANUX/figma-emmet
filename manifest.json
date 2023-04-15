@@ -1,0 +1,12 @@
+{
+  "name": "figma-emmet",
+  "id": "1229074871320259742",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": [
+    "figma"
+  ],
+  "ui": "ui.html"
+}

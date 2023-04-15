@@ -1,0 +1,73 @@
+
+  <style>
+    body {
+      padding: 20px;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 1.2em;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0069d9;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+
+  <h1>Emmet HTML Generator</h1>
+  <p>Click the button below to generate Emmet HTML code for the selected layers.</p>
+  <button id="generate-btn">Generate Code</button>
+  <div id="output-container">
+    <textarea id="output" placeholder="Generated code will appear here"></textarea>
+    <p id="error-msg" class="error"></p>
+  </div>
+
+  <script>
+    // Get a reference to the Generate button.
+    const generateBtn = document.getElementById('generate-btn');
+
+    // Add a click event listener to the Generate button.
+    generateBtn.addEventListener('click', () => {
+      // Send a message to the Figma plugin code to generate the Emmet code.
+      parent.postMessage({ pluginMessage: { type: `generateEmmetCode` } }, '*');
+
+    });
+
+    window.onmessage = (e) => {
+      if (e.data.pluginMessage.type === 'generateEmmetCode') {
+        if (e.data.pluginMessage.payload) {
+          const outputTextarea = document.getElementById('output');
+          outputTextarea.value = e.data.pluginMessage.payload;
+        } else {
+            const errorMsg = document.getElementById('error-msg');
+            errorMsg.textContent = `Please, select item in layers`;
+            return;
+        }
+      }
+    }
+  </script>
