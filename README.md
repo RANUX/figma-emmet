@@ -17,7 +17,7 @@ Open the Figma design you want to generate Emmet code for.
 
 ## Tips and tricks
 
-1. Add a % character as prefix if you want to ignore or prevent a layer or group of layers to be copied.
+1. Add a % or // character as prefix if you want to ignore or prevent a layer or group of layers to be copied.
 
 2. If you have a block or a image with a prefix or name as "img" it will automatically add width and height attributes. Example:
   - img

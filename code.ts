@@ -72,11 +72,7 @@ function getEmmetMarkup(layers: ReadonlyArray<SceneNode>): string {
       emmetString += getEmmetMarkup(subLayers);
       emmetString += ')';
     } else if (isText(layer)) {
-      if (isTag(layer) || isTextTag(layer)) {
-        emmetString += `${layerName}{${getText(layer)}}`;
-      } else {
-        emmetString += `{${getText(layer)}}`;
-      }
+      emmetString += `{${getText(layer)}}`;
     } else if (isImage(layer)) {
       const { width, height } = layer;
       emmetString += `${layerName}[width=${width} height=${height}]`;
