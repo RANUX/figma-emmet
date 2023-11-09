@@ -57,6 +57,10 @@ function isIgnored(layer: SceneNode): boolean {
   return layer.name.startsWith('%');
 }
 
+function replaceDashToSpace(name: string): string {
+  return name.replace(/-/g, ' ');
+}
+
 function getEmmetMarkup(layers: ReadonlyArray<SceneNode>): string {
   let emmetString = '';
   for (let i = layers.length - 1; i >= 0; i--) {
@@ -72,7 +76,11 @@ function getEmmetMarkup(layers: ReadonlyArray<SceneNode>): string {
       emmetString += getEmmetMarkup(subLayers);
       emmetString += ')';
     } else if (isText(layer)) {
-      emmetString += `{${getText(layer)}}`;
+      if (replaceDashToSpace(layerName) === getText(layer)) {
+        emmetString += `{${getText(layer)}}`
+      } else {
+        emmetString += `${layerName}{${getText(layer)}}`;
+      }
     } else if (isImage(layer)) {
       const { width, height } = layer;
       emmetString += `${layerName}[width=${width} height=${height}]`;
